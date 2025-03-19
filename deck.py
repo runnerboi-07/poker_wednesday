@@ -1,3 +1,5 @@
+import random
+
 class Card:
     RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
     SUITS = ["♠️", "♥️", "♦️", "♣️"]
@@ -33,6 +35,15 @@ class Deck:
     def __str__(self):
         return str(self._deck)
 
-deck = Deck()
-print(deck)
+    def shuffle(self):
+        random.shuffle(self._deck)
 
+    def deal(self):
+        return self._deck.pop(0)
+
+if __name__ == "__main__":
+    deck = Deck()
+    print(deck)
+    deck.shuffle()
+    print(deck)
+    print(deck.deal())
