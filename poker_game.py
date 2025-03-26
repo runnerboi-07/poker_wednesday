@@ -57,24 +57,30 @@ class PokerHand:
     def is_full_house(self):
         return self.number_of_matches == 8
 
+    @property
+    def is_straight(self):
+        self.cards.sort()
+        distance = Card.RANKS.index(self.cards[4].rank) - \
+                   Card.RANKS.index(self.cards[0].rank)
+        return self.number_of_matches == 0 and distance == 4
 
 count = 0
 matches = 0
-while matches < 10000:
+while matches < 1000:
     deck = Deck()
     deck.shuffle()
     hand = PokerHand(deck)
-    if hand.is_three_pair:
+    if hand.is_straight:
         matches += 1
-        # print(hand)
+        print(hand)
     count += 1
 
-print(f"Probability of a pair is {100*matches/count}%")
+print(f"Probability of a straight flush is {100*matches/count}%")
 
 # Probability of each type of pair:
 # single pair ~ 42.405% (10k)
 # two pair ~ 4.719% (10k)
 # three pair ~ 2.091% (10k)
 # four pair ~ 0.026% (100)
-# full_house ~ 0.146% (1k)
-
+# full house ~ 0.146% (1k)
+# straight flush ~ 0.351% (1k)

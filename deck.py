@@ -11,6 +11,17 @@ class Card:
         self._rank = rank
         self._suit = suit
 
+    def __eq__(self, other):
+        return self.rank == other.rank
+
+    def __gt__(self, other):
+        """
+        Compares position of 'self' & 'other' in RANKS list
+        :param other:
+        :return:
+        """
+        return self.RANKS.index(self.rank) > self.RANKS.index(other.rank)
+
     def __str__(self): # str for when it will be put in a normal string
         return f"{self._rank}{self._suit}"
 
